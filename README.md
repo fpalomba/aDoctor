@@ -1,6 +1,8 @@
 # aDoctor
 Code Smell Detector able to detect a set of 16 Android-specific design flaws.
 
+aDoctor is a project developed using Java able to identify design problems in Android apps.
+
 For the moment, the tool supports the detection of the following code smells:
 
 - Debuggable Release;
@@ -36,5 +38,3 @@ Icons made by Freepik from www.flaticon.com is licensed by CC 3.0 BY.
 Icons made by Madebyoliver from www.flaticon.com is licensed by CC 3.0 BY.
 
 Icons made by Vectors Market from www.flaticon.com is licensed by CC 3.0 BY.
-
-aDoctor is a project developed using Java able to identify design problems in Android apps.
