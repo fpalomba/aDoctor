@@ -28,6 +28,7 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.eclipse.core.runtime.CoreException;
 
 import java.io.FileWriter;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;

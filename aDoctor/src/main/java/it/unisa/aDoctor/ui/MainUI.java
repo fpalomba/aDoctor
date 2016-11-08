@@ -6,8 +6,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.URISyntaxException;
 import javax.swing.JFileChooser;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.CoreException;
@@ -395,11 +394,11 @@ public class MainUI extends javax.swing.JFrame {
 
         try {
             RunAndroidSmellDetection.main(args);
+            viewResults.setEnabled(true);
         } catch (IOException | CoreException ex) {
-            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Errore!");
         }
 
-        viewResults.setEnabled(true);
     }//GEN-LAST:event_startProcessButtonActionPerformed
 
     private void inputFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFolderButtonActionPerformed
