@@ -17,14 +17,20 @@
             <version>3.1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.tycho</groupId>
+            <groupId>org.eclipse.jdt</groupId>
             <artifactId>org.eclipse.jdt.core</artifactId>
-            <version>3.8.2.v20120814-155456</version>
+            <version>3.10.0</version>
         </dependency>
         <dependency>
-            <groupId>eclipse</groupId>
-            <artifactId>eclipse-runtime</artifactId>
-            <version>2.1.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.1</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <properties>
@@ -32,4 +38,31 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>it.unisa.aDoctor.ui.MainUI</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
