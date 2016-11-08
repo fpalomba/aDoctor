@@ -253,90 +253,105 @@
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="DTWC"/>
+        <Property name="toolTipText" type="java.lang.String" value="Data Transmission Without Compression"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="DRCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="DR"/>
+        <Property name="toolTipText" type="java.lang.String" value="Debuggable Release"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="DWCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="DW"/>
+        <Property name="toolTipText" type="java.lang.String" value="Durable Wakelock"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="IDFPCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="IDFP"/>
+        <Property name="toolTipText" type="java.lang.String" value="Inefficient Data Format and Parser"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="IDSCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="IDS"/>
+        <Property name="toolTipText" type="java.lang.String" value="Inefficient Data Structure"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="ISQLQCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="ISQLQ"/>
+        <Property name="toolTipText" type="java.lang.String" value="Inefficient SQL Query"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="IGSCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="IGS"/>
+        <Property name="toolTipText" type="java.lang.String" value="Internal Getter and Setter"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="LICCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="LIC"/>
+        <Property name="toolTipText" type="java.lang.String" value="Leaking Inner Class"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="LTCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="LT"/>
+        <Property name="toolTipText" type="java.lang.String" value="Leaking Thread"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="MIMCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="MIM"/>
+        <Property name="toolTipText" type="java.lang.String" value="Member Ignoring Method"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="NLMRCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="NLMR"/>
+        <Property name="toolTipText" type="java.lang.String" value="No Low Memory Resolver"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="PDCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="PD"/>
+        <Property name="toolTipText" type="java.lang.String" value="Public Data"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="RAMCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="RAM"/>
+        <Property name="toolTipText" type="java.lang.String" value="Rigid Alarm Manager"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="SLCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="SL"/>
+        <Property name="toolTipText" type="java.lang.String" value="Slow Loop"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="UCCheck">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="UC"/>
+        <Property name="toolTipText" type="java.lang.String" value="Unclosed Closable"/>
       </Properties>
     </Component>
   </SubComponents>

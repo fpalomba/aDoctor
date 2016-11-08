@@ -122,48 +122,63 @@ public class MainUI extends javax.swing.JFrame {
 
         DTWCCheck.setSelected(true);
         DTWCCheck.setText("DTWC");
+        DTWCCheck.setToolTipText("Data Transmission Without Compression");
 
         DRCheck.setSelected(true);
         DRCheck.setText("DR");
+        DRCheck.setToolTipText("Debuggable Release");
 
         DWCheck.setSelected(true);
         DWCheck.setText("DW");
+        DWCheck.setToolTipText("Durable Wakelock");
 
         IDFPCheck.setSelected(true);
         IDFPCheck.setText("IDFP");
+        IDFPCheck.setToolTipText("Inefficient Data Format and Parser");
 
         IDSCheck.setSelected(true);
         IDSCheck.setText("IDS");
+        IDSCheck.setToolTipText("Inefficient Data Structure");
 
         ISQLQCheck.setSelected(true);
         ISQLQCheck.setText("ISQLQ");
+        ISQLQCheck.setToolTipText("Inefficient SQL Query");
 
         IGSCheck.setSelected(true);
         IGSCheck.setText("IGS");
+        IGSCheck.setToolTipText("Internal Getter and Setter");
 
         LICCheck.setSelected(true);
         LICCheck.setText("LIC");
+        LICCheck.setToolTipText("Leaking Inner Class");
 
         LTCheck.setSelected(true);
         LTCheck.setText("LT");
+        LTCheck.setToolTipText("Leaking Thread");
 
         MIMCheck.setSelected(true);
         MIMCheck.setText("MIM");
+        MIMCheck.setToolTipText("Member Ignoring Method");
 
         NLMRCheck.setSelected(true);
         NLMRCheck.setText("NLMR");
+        NLMRCheck.setToolTipText("No Low Memory Resolver");
 
         PDCheck.setSelected(true);
         PDCheck.setText("PD");
+        PDCheck.setToolTipText("Public Data");
 
         RAMCheck.setSelected(true);
         RAMCheck.setText("RAM");
+        RAMCheck.setToolTipText("Rigid Alarm Manager");
 
         SLCheck.setSelected(true);
         SLCheck.setText("SL");
+        SLCheck.setToolTipText("Slow Loop");
 
         UCCheck.setSelected(true);
         UCCheck.setText("UC");
+        UCCheck.setToolTipText("Unclosed Closable");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
