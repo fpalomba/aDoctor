@@ -9,22 +9,21 @@ import org.eclipse.jdt.core.dom.ForStatement;
 
 public class ForStatementVisitor extends ASTVisitor {
 
-	private List<ForStatement> forStatements = new ArrayList<ForStatement>();
+    private final List<ForStatement> forStatements = new ArrayList<>();
 
-	@Override
-	public boolean visit(ForStatement node) {
-		forStatements.add(node);
+    @Override
+    public boolean visit(ForStatement node) {
+        forStatements.add(node);
 
-		return super.visit(node);
-	}
+        return super.visit(node);
+    }
 
-	/**
-	 * This method allows to get all the Blocks for the Class on which it is;
-	 * 
-	 * @return
-	 * 				a List of all the for statements;
-	 */
-	public Collection<ForStatement> getForStatements() {
-		return forStatements;			
-	}
+    /**
+     * This method allows to get all the Blocks for the Class on which it is;
+     *
+     * @return a List of all the for statements;
+     */
+    public Collection<ForStatement> getForStatements() {
+        return forStatements;
+    }
 }

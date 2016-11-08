@@ -9,22 +9,21 @@ import org.eclipse.jdt.core.dom.AssertStatement;
 
 public class AssertVisitor extends ASTVisitor {
 
-	private List<AssertStatement> asserts = new ArrayList<AssertStatement>();
+    private final List<AssertStatement> asserts = new ArrayList<>();
 
-	@Override
-	public boolean visit(AssertStatement node) {
-		asserts.add(node);
+    @Override
+    public boolean visit(AssertStatement node) {
+        asserts.add(node);
 
-		return super.visit(node);
-	}
+        return super.visit(node);
+    }
 
-	/**
-	 * This method allows to get all the Blocks for the Class on which it is;
-	 * 
-	 * @return
-	 * 				a List of all Blocks;
-	 */
-	public Collection<AssertStatement> getAsserts() {
-		return asserts;			
-	}
+    /**
+     * This method allows to get all the Blocks for the Class on which it is;
+     *
+     * @return a List of all Blocks;
+     */
+    public Collection<AssertStatement> getAsserts() {
+        return asserts;
+    }
 }

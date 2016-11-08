@@ -2,7 +2,7 @@ package it.aDoctor.parser;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -13,179 +13,180 @@ import it.aDoctor.beans.*;
 
 public class ClassParser {
 
-	public static ClassBean parse(TypeDeclaration pClassNode) {
-		int numberOfGetterOrSetter=0;
-		
-		// Instantiate the bean
-		ClassBean classBean = new ClassBean();
+    public static ClassBean parse(TypeDeclaration pClassNode) {
+        int numberOfGetterOrSetter = 0;
 
-		if(pClassNode.getSuperclassType() != null)
-			classBean.setSuperclass(pClassNode.getSuperclassType().toString());
-		else
-			classBean.setSuperclass(null);
+        // Instantiate the bean
+        ClassBean classBean = new ClassBean();
 
-		// Set the name
-		classBean.setName(pClassNode.getName().toString());
-		
-		// Get the instance variable nodes 
-		Collection<FieldDeclaration> instanceVariableNodes = new Vector<FieldDeclaration>();
-		pClassNode.accept(new InstanceVariableVisitor(instanceVariableNodes));
+        if (pClassNode.getSuperclassType() != null) {
+            classBean.setSuperclass(pClassNode.getSuperclassType().toString());
+        } else {
+            classBean.setSuperclass(null);
+        }
 
-		classBean.setTextContent(pClassNode.toString());
+        // Set the name
+        classBean.setName(pClassNode.getName().toString());
 
-		Pattern newLine = Pattern.compile("\n");
-		String[] lines = newLine.split(pClassNode.toString());
+        // Get the instance variable nodes 
+        Collection<FieldDeclaration> instanceVariableNodes = new ArrayList<>();
+        pClassNode.accept(new InstanceVariableVisitor(instanceVariableNodes));
 
-		classBean.setLOC(lines.length);
+        classBean.setTextContent(pClassNode.toString());
 
-		// Get the instance variable beans from the instance variable nodes
-		Collection<InstanceVariableBean> instanceVariableBeans = new Vector<InstanceVariableBean>();
-		for (FieldDeclaration instanceVariableNode : instanceVariableNodes)
-			instanceVariableBeans.add(InstanceVariableParser.parse(instanceVariableNode));
+        Pattern newLine = Pattern.compile("\n");
+        String[] lines = newLine.split(pClassNode.toString());
 
-		// Set the collection of instance variables
-		classBean.setInstanceVariables(instanceVariableBeans);
+        classBean.setLOC(lines.length);
 
-		// Get the method nodes
-		Collection<MethodDeclaration> methodNodes = new Vector<MethodDeclaration>();
-		pClassNode.accept(new MethodVisitor(methodNodes));
+        // Get the instance variable beans from the instance variable nodes
+        Collection<InstanceVariableBean> instanceVariableBeans = new ArrayList<>();
+        for (FieldDeclaration instanceVariableNode : instanceVariableNodes) {
+            instanceVariableBeans.add(InstanceVariableParser.parse(instanceVariableNode));
+        }
 
-		// Get the method beans from the method nodes
-		Collection<MethodBean> methodBeans = new Vector<MethodBean>();
-		for (MethodDeclaration methodNode : methodNodes) {
-			
-			if((methodNode.getName().toString().contains("get") || (methodNode.getName().toString().contains("set")))) {
-				if(methodNode.parameters().size() == 0) {
-					numberOfGetterOrSetter++;
-				}
-			}
-			
-			methodBeans.add(MethodParser.parse(methodNode, instanceVariableBeans));
-		}
+        // Set the collection of instance variables
+        classBean.setInstanceVariables(instanceVariableBeans);
 
-		classBean.setNumberOfGetterAndSetter(numberOfGetterOrSetter);
-		
-		// Iterate over the collection of methods
-		for (MethodBean classMethod : methodBeans) {
+        // Get the method nodes
+        Collection<MethodDeclaration> methodNodes = new ArrayList<>();
+        pClassNode.accept(new MethodVisitor(methodNodes));
 
-			// Instantiate a collection of class-defined invocations
-			Collection<MethodBean> definedInvocations = new Vector<MethodBean>();
+        // Get the method beans from the method nodes
+        Collection<MethodBean> methodBeans = new ArrayList<>();
+        for (MethodDeclaration methodNode : methodNodes) {
 
-			// Get the method invocations
-			Collection<MethodBean> classMethodInvocations = classMethod.getMethodCalls();
+            if ((methodNode.getName().toString().contains("get") || (methodNode.getName().toString().contains("set")))) {
+                if (methodNode.parameters().isEmpty()) {
+                    numberOfGetterOrSetter++;
+                }
+            }
 
-			// Iterate over the collection of method invocations
-			for (MethodBean classMethodInvocation : classMethodInvocations) {
-				definedInvocations.add(classMethodInvocation);
-			}
+            methodBeans.add(MethodParser.parse(methodNode, instanceVariableBeans));
+        }
 
-			// Set the class-defined invocations
-			classMethod.setMethodCalls(definedInvocations);
-		}
-		
-		
+        classBean.setNumberOfGetterAndSetter(numberOfGetterOrSetter);
 
-		// Set the collection of methods
-		classBean.setMethods(methodBeans);
+        // Iterate over the collection of methods
+        for (MethodBean classMethod : methodBeans) {
 
-		return classBean;
+            // Instantiate a collection of class-defined invocations
+            Collection<MethodBean> definedInvocations = new ArrayList<>();
 
-	}
-	
-	public static ClassBean parse(TypeDeclaration pClassNode, String belongingPackage, List<String> imports) {
-		int numberOfGetterOrSetter=0;
-		
-		// Instantiate the bean
-		ClassBean classBean = new ClassBean();
+            // Get the method invocations
+            Collection<MethodBean> classMethodInvocations = classMethod.getMethodCalls();
 
-		if(pClassNode.getSuperclassType() != null)
-			classBean.setSuperclass(pClassNode.getSuperclassType().toString());
-		else
-			classBean.setSuperclass(null);
+            // Iterate over the collection of method invocations
+            for (MethodBean classMethodInvocation : classMethodInvocations) {
+                definedInvocations.add(classMethodInvocation);
+            }
 
-		// Set the name
-		classBean.setName(pClassNode.getName().toString());
-		classBean.setImports(imports);
-		classBean.setBelongingPackage(belongingPackage);
+            // Set the class-defined invocations
+            classMethod.setMethodCalls(definedInvocations);
+        }
 
-		// Get the instance variable nodes 
-		Collection<FieldDeclaration> instanceVariableNodes = new Vector<FieldDeclaration>();
-		pClassNode.accept(new InstanceVariableVisitor(instanceVariableNodes));
+        // Set the collection of methods
+        classBean.setMethods(methodBeans);
 
-		classBean.setTextContent(pClassNode.toString());
+        return classBean;
 
-		Pattern newLine = Pattern.compile("\n");
-		String[] lines = newLine.split(pClassNode.toString());
+    }
 
-		classBean.setLOC(lines.length);
+    public static ClassBean parse(TypeDeclaration pClassNode, String belongingPackage, List<String> imports) {
+        int numberOfGetterOrSetter = 0;
 
-		// Get the instance variable beans from the instance variable nodes
-		Collection<InstanceVariableBean> instanceVariableBeans = new Vector<InstanceVariableBean>();
-		for (FieldDeclaration instanceVariableNode : instanceVariableNodes)
-			instanceVariableBeans.add(InstanceVariableParser.parse(instanceVariableNode));
+        // Instantiate the bean
+        ClassBean classBean = new ClassBean();
 
-		// Set the collection of instance variables
-		classBean.setInstanceVariables(instanceVariableBeans);
+        if (pClassNode.getSuperclassType() != null) {
+            classBean.setSuperclass(pClassNode.getSuperclassType().toString());
+        } else {
+            classBean.setSuperclass(null);
+        }
 
-		// Get the method nodes
-		Collection<MethodDeclaration> methodNodes = new Vector<MethodDeclaration>();
-		pClassNode.accept(new MethodVisitor(methodNodes));
+        // Set the name
+        classBean.setName(pClassNode.getName().toString());
+        classBean.setImports(imports);
+        classBean.setBelongingPackage(belongingPackage);
 
-		// Get the method beans from the method nodes
-		Collection<MethodBean> methodBeans = new Vector<MethodBean>();
-		for (MethodDeclaration methodNode : methodNodes) {
-			
-			if((methodNode.getName().toString().contains("get") || (methodNode.getName().toString().contains("set")))) {
-				if(methodNode.parameters().size() == 0) {
-					numberOfGetterOrSetter++;
-				}
-			}
-			
-			methodBeans.add(MethodParser.parse(methodNode, instanceVariableBeans));
-		}
+        // Get the instance variable nodes 
+        Collection<FieldDeclaration> instanceVariableNodes = new ArrayList<>();
+        pClassNode.accept(new InstanceVariableVisitor(instanceVariableNodes));
 
-		classBean.setNumberOfGetterAndSetter(numberOfGetterOrSetter);
-		
-		// Iterate over the collection of methods
-		for (MethodBean classMethod : methodBeans) {
+        classBean.setTextContent(pClassNode.toString());
 
-			// Instantiate a collection of class-defined invocations
-			Collection<MethodBean> definedInvocations = new Vector<MethodBean>();
+        Pattern newLine = Pattern.compile("\n");
+        String[] lines = newLine.split(pClassNode.toString());
 
-			// Get the method invocations
-			Collection<MethodBean> classMethodInvocations = classMethod.getMethodCalls();
+        classBean.setLOC(lines.length);
 
-			// Iterate over the collection of method invocations
-			for (MethodBean classMethodInvocation : classMethodInvocations) {
-				definedInvocations.add(classMethodInvocation);
-			}
+        // Get the instance variable beans from the instance variable nodes
+        Collection<InstanceVariableBean> instanceVariableBeans = new ArrayList<>();
+        for (FieldDeclaration instanceVariableNode : instanceVariableNodes) {
+            instanceVariableBeans.add(InstanceVariableParser.parse(instanceVariableNode));
+        }
 
-			// Set the class-defined invocations
-			classMethod.setMethodCalls(definedInvocations);
-		}
-		
-		
+        // Set the collection of instance variables
+        classBean.setInstanceVariables(instanceVariableBeans);
 
-		// Set the collection of methods
-		classBean.setMethods(methodBeans);
+        // Get the method nodes
+        Collection<MethodDeclaration> methodNodes = new ArrayList<>();
+        pClassNode.accept(new MethodVisitor(methodNodes));
 
-		return classBean;
+        // Get the method beans from the method nodes
+        Collection<MethodBean> methodBeans = new ArrayList<>();
+        for (MethodDeclaration methodNode : methodNodes) {
 
-	}
+            if ((methodNode.getName().toString().contains("get") || (methodNode.getName().toString().contains("set")))) {
+                if (methodNode.parameters().isEmpty()) {
+                    numberOfGetterOrSetter++;
+                }
+            }
 
-	@SuppressWarnings("unused")
-	private static MethodBean isInto(MethodBean pClassMethodInvocation, Collection<MethodBean> pMethodBeans) {
+            methodBeans.add(MethodParser.parse(methodNode, instanceVariableBeans));
+        }
 
-		// Iterate over the collection of methods
-		for (MethodBean methodBean : pMethodBeans) {
+        classBean.setNumberOfGetterAndSetter(numberOfGetterOrSetter);
 
-			// If there is a method with the same name, return it
-			if (methodBean.getName().equals(pClassMethodInvocation.getName()))
-				return methodBean;
-		}
+        // Iterate over the collection of methods
+        for (MethodBean classMethod : methodBeans) {
 
-		// No correspondence found
-		return null;
+            // Instantiate a collection of class-defined invocations
+            Collection<MethodBean> definedInvocations = new ArrayList<>();
 
-	}
+            // Get the method invocations
+            Collection<MethodBean> classMethodInvocations = classMethod.getMethodCalls();
+
+            // Iterate over the collection of method invocations
+            for (MethodBean classMethodInvocation : classMethodInvocations) {
+                definedInvocations.add(classMethodInvocation);
+            }
+
+            // Set the class-defined invocations
+            classMethod.setMethodCalls(definedInvocations);
+        }
+
+        // Set the collection of methods
+        classBean.setMethods(methodBeans);
+
+        return classBean;
+
+    }
+
+    @SuppressWarnings("unused")
+    private static MethodBean isInto(MethodBean pClassMethodInvocation, Collection<MethodBean> pMethodBeans) {
+
+        // Iterate over the collection of methods
+        for (MethodBean methodBean : pMethodBeans) {
+
+            // If there is a method with the same name, return it
+            if (methodBean.getName().equals(pClassMethodInvocation.getName())) {
+                return methodBean;
+            }
+        }
+
+        // No correspondence found
+        return null;
+
+    }
 }

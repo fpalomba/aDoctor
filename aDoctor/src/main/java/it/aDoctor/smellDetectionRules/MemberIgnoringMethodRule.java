@@ -5,17 +5,18 @@ import it.aDoctor.beans.MethodBean;
 
 public class MemberIgnoringMethodRule {
 
-	public boolean isMemberIgnoringMethod(ClassBean pClass) {
+    public boolean isMemberIgnoringMethod(ClassBean pClass) {
 
-		for (MethodBean methodBean : pClass.getMethods()) {
-			if (!methodBean.isStatic()) {
-				if (pClass.getInstanceVariables().size() > 0) {
-					if (methodBean.getUsedInstanceVariables().size() == 0)
-						return true;
-				}
-			}
-		}
+        for (MethodBean methodBean : pClass.getMethods()) {
+            if (!methodBean.isStatic()) {
+                if (pClass.getInstanceVariables().size() > 0) {
+                    if (methodBean.getUsedInstanceVariables().isEmpty()) {
+                        return true;
+                    }
+                }
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

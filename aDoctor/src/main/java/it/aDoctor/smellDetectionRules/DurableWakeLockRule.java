@@ -8,17 +8,17 @@ import it.aDoctor.beans.MethodBean;
 
 public class DurableWakeLockRule {
 
-	public boolean isDurableWakeLock(ClassBean pClass) {
+    public boolean isDurableWakeLock(ClassBean pClass) {
 
-		Pattern regex = Pattern.compile("(.*)acquire(\\s*)()", Pattern.MULTILINE);
-		for (MethodBean method : pClass.getMethods()) {
-			Matcher regexMatcher = regex.matcher(method.getTextContent());
-			if (regexMatcher.find()) {
-			    return true;
-			}
-		}				
-		return false;
-		
-	}
+        Pattern regex = Pattern.compile("(.*)acquire(\\s*)()", Pattern.MULTILINE);
+        for (MethodBean method : pClass.getMethods()) {
+            Matcher regexMatcher = regex.matcher(method.getTextContent());
+            if (regexMatcher.find()) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 
 }

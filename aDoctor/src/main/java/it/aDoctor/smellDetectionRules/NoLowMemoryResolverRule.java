@@ -13,51 +13,56 @@ import org.apache.commons.io.LineIterator;
 import it.aDoctor.beans.ClassBean;
 
 public class NoLowMemoryResolverRule {
-	
-	private List<String> onLowMemoryClassList;
-	
-	public NoLowMemoryResolverRule() throws IOException {	
-		
-		onLowMemoryClassList = new ArrayList<String>();
-		File classList = FileUtils.getFile(System.getProperty("user.dir")+"/src/files/onLowMemoryClasses.txt");
+
+    private final List<String> onLowMemoryClassList;
+
+    public NoLowMemoryResolverRule() throws IOException {
+
+        onLowMemoryClassList = new ArrayList<>();
+        File classList = FileUtils.getFile(System.getProperty("user.dir") + "/src/files/onLowMemoryClasses.txt");
         LineIterator iter = FileUtils.lineIterator(classList);
         while (iter.hasNext()) {
-        	onLowMemoryClassList.add(iter.next());
-		}
-		iter.close();
-	}
+            onLowMemoryClassList.add(iter.next());
+        }
+        iter.close();
+    }
 
-	/**
-	 * Questo metodo restituisce true se la classe non implementa il metodo onLowMemory()
-	 * @param pClass
-	 * @return boolean
-	 */
-	public boolean isNoLowMemoryResolver(ClassBean pClass) {
+    /**
+     * Questo metodo restituisce true se la classe non implementa il metodo
+     * onLowMemory()
+     *
+     * @param pClass
+     * @return boolean
+     */
+    public boolean isNoLowMemoryResolver(ClassBean pClass) {
 
-		if (inheritsOnLowMemoryMethod(pClass)) {
-			Pattern regex = Pattern.compile("onLowMemory", Pattern.MULTILINE);
-			Matcher regexMatcher = regex.matcher(pClass.getTextContent());
-			if (!regexMatcher.find()) {
-			    return true;
-			}
-		}
-		return false;
-	}
+        if (inheritsOnLowMemoryMethod(pClass)) {
+            Pattern regex = Pattern.compile("onLowMemory", Pattern.MULTILINE);
+            Matcher regexMatcher = regex.matcher(pClass.getTextContent());
+            if (!regexMatcher.find()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * Questo metodo restituisce true se la classe eredita il metodo onLowMemory()
-	 * @param pClass
-	 * @return boolean
-	 */
-	public boolean inheritsOnLowMemoryMethod(ClassBean pClass) {
-		
-		if (pClass.getSuperclass() != null) {
-			for (String className : onLowMemoryClassList) {
-				if (className.equals(pClass.getSuperclass()))
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Questo metodo restituisce true se la classe eredita il metodo
+     * onLowMemory()
+     *
+     * @param pClass
+     * @return boolean
+     */
+    public boolean inheritsOnLowMemoryMethod(ClassBean pClass) {
+
+        if (pClass.getSuperclass() != null) {
+            for (String className : onLowMemoryClassList) {
+                if (className.equals(pClass.getSuperclass())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

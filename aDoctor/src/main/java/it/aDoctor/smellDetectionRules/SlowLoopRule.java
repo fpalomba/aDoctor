@@ -10,16 +10,13 @@ import it.aDoctor.parser.ForStatementVisitor;
 
 public class SlowLoopRule {
 
-	public boolean isSlowLoop(ClassBean pClassBean) throws IOException {		
-		CodeParser parser = new CodeParser();
-		CompilationUnit compilationUnit = parser.createParser(pClassBean.getTextContent());
-		ForStatementVisitor forVisitor = new ForStatementVisitor();
-		
-		compilationUnit.accept(forVisitor);
-		
-		if(! forVisitor.getForStatements().isEmpty())
-			return true;
-		
-		return false;
-	}
+    public boolean isSlowLoop(ClassBean pClassBean) throws IOException {
+        CodeParser parser = new CodeParser();
+        CompilationUnit compilationUnit = parser.createParser(pClassBean.getTextContent());
+        ForStatementVisitor forVisitor = new ForStatementVisitor();
+
+        compilationUnit.accept(forVisitor);
+
+        return !forVisitor.getForStatements().isEmpty();
+    }
 }

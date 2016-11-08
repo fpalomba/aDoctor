@@ -7,23 +7,24 @@ import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 public class InnerClassVisitor extends ASTVisitor {
-	
-	private Collection<TypeDeclaration> innerClasses;
 
-	public InnerClassVisitor() {
-		this.innerClasses=new ArrayList<TypeDeclaration>();
-	}
+    private final Collection<TypeDeclaration> innerClasses;
 
-	public boolean visit(TypeDeclaration typeDeclarationStatement) {
+    public InnerClassVisitor() {
+        this.innerClasses = new ArrayList<>();
+    }
 
-	    if (!typeDeclarationStatement.isPackageMemberTypeDeclaration()) {
-	           innerClasses.add(typeDeclarationStatement);        
-	    }
+    @Override
+    public boolean visit(TypeDeclaration typeDeclarationStatement) {
 
-	    return true;
-	}
-	
-	public Collection<TypeDeclaration> getInnerClasses() {
-		return this.innerClasses;
-	}
+        if (!typeDeclarationStatement.isPackageMemberTypeDeclaration()) {
+            innerClasses.add(typeDeclarationStatement);
+        }
+
+        return true;
+    }
+
+    public Collection<TypeDeclaration> getInnerClasses() {
+        return this.innerClasses;
+    }
 }
