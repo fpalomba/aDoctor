@@ -14,7 +14,6 @@ For the moment, the tool supports the detection of the following code smells:
 - Internal Getter and Setter;
 - Leaking Thread;
 - Leaking Inner Class;
-- Set Config Changes;
 - No Low Memory Resolver;
 - Unclosed Closable;
 - Durable Wakelock;
@@ -39,25 +38,24 @@ where:
 
 The complete list of code smell IDs is in the following:
 
-- 000000000000001: Data Transmission Without Compression;
-- 000000000000002: Debuggable Release;
-- 000000000000003: Durable Wakelock;
-- 000000000000004: Inefficient Data Format and Parser;
-- 000000000000005: Inefficient Data Structure;
-- 000000000000006: Inefficient SQL Query;
-- 000000000000007: Internal Getter and Setter;
-- 000000000000008: Leaking Inner Class;
-- 000000000000009: Leaking Thread;
-- 000000000000010: Member Ignoring Method;
-- 000000000000011: No Low Memory Resolver;
-- 000000000000012: Public Data;
-- 000000000000013: Rigid Alarm Manager;
-- 000000000000014: Slow Loop;
-- 000000000000015: Unclosed Closable;
-- 000000000000016: Set Config Changes;
+- 100000000000000: Data Transmission Without Compression;
+- 010000000000000: Debuggable Release;
+- 001000000000000: Durable Wakelock;
+- 000100000000000: Inefficient Data Format and Parser;
+- 000010000000000: Inefficient Data Structure;
+- 000001000000000: Inefficient SQL Query;
+- 000000100000000: Internal Getter and Setter;
+- 000000010000000: Leaking Inner Class;
+- 000000001000000: Leaking Thread;
+- 000000000100000: Member Ignoring Method;
+- 000000000010000: No Low Memory Resolver;
+- 000000000001000: Public Data;
+- 000000000000100: Rigid Alarm Manager;
+- 000000000000010: Slow Loop;
+- 000000000000001: Unclosed Closable;
 
 # License
-The project is released under Apache 2.0 license.
+The project is released under MIT license.
 
 Icons made by Dave Gandy from www.flaticon.com is licensed by CC 3.0 BY.
 
