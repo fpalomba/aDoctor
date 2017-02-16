@@ -1,5 +1,5 @@
 # aDoctor
-Code Smell Detector able to detect a set of 16 Android-specific design flaws.
+Code Smell Detector able to detect a set of 15 Android-specific design flaws.
 
 aDoctor is a project developed using Java able to identify design problems in Android apps.
 
