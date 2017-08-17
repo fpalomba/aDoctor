@@ -1,4 +1,6 @@
 # aDoctor
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Ffpalomba%2FaDoctor.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Ffpalomba%2FaDoctor?ref=badge_shield)
+
 Code Smell Detector able to detect a set of 15 Android-specific design flaws.
 
 aDoctor is a project developed using Java able to identify design problems in Android apps.
@@ -68,3 +70,6 @@ Icons made by Freepik from www.flaticon.com is licensed by CC 3.0 BY.
 Icons made by Madebyoliver from www.flaticon.com is licensed by CC 3.0 BY.
 
 Icons made by Vectors Market from www.flaticon.com is licensed by CC 3.0 BY.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Ffpalomba%2FaDoctor.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Ffpalomba%2FaDoctor?ref=badge_large)
